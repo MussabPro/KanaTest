@@ -1,0 +1,547 @@
+/* =========================================
+   KanaTest — Global Styles
+   ========================================= */
+
+/* ---- Nav tabs ---- */
+.nav-tab {
+  color: #6b7280;
+  background: transparent;
+}
+
+.nav-tab:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.dark .nav-tab:hover {
+  background: #374151;
+  color: #f9fafb;
+}
+
+.nav-tab.active {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark .nav-tab.active {
+  background: #111827;
+  color: #f9fafb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ---- Section panels ---- */
+.section-panel.hidden {
+  display: none;
+}
+
+/* ---- Config options ---- */
+.config-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #374151;
+  border: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.dark .config-option {
+  color: #d1d5db;
+}
+
+.config-option:hover {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+.dark .config-option:hover {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+/* =============================================
+   CUSTOM RADIO BUTTON
+   ============================================= */
+.custom-radio {
+  position: relative;
+  width: 1.125rem;
+  height: 1.125rem;
+  min-width: 1.125rem;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  background: #fff;
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dark .custom-radio {
+  background: #1f2937;
+  border-color: #4b5563;
+}
+
+/* Hide the native input */
+.config-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+/* The visible dot (::after on sibling .custom-radio) */
+.custom-radio::after {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.18s, transform 0.18s;
+  transform: scale(0);
+}
+
+.config-option input[type="radio"]:checked~.custom-radio {
+  border-color: #ff2d72;
+  background: #fff0f5;
+  box-shadow: 0 0 0 3px rgba(255, 45, 114, 0.15);
+}
+
+.dark .config-option input[type="radio"]:checked~.custom-radio {
+  background: rgba(255, 45, 114, 0.12);
+}
+
+.config-option input[type="radio"]:checked~.custom-radio::after {
+  background: #ff2d72;
+  transform: scale(1);
+}
+
+.config-option:hover .custom-radio {
+  border-color: #ff94b8;
+}
+
+/* =============================================
+   CUSTOM CHECKBOX
+   ============================================= */
+.custom-checkbox {
+  position: relative;
+  width: 1.125rem;
+  height: 1.125rem;
+  min-width: 1.125rem;
+  border-radius: 0.3rem;
+  border: 2px solid #d1d5db;
+  background: #fff;
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.dark .custom-checkbox {
+  background: #1f2937;
+  border-color: #4b5563;
+}
+
+/* Hide the native input */
+.config-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+/* Checkmark */
+.custom-checkbox::after {
+  content: '';
+  width: 0.35rem;
+  height: 0.6rem;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg) scale(0) translate(-1px, -1px);
+  transition: transform 0.18s;
+}
+
+.config-option input[type="checkbox"]:checked~.custom-checkbox {
+  background: #ff2d72;
+  border-color: #ff2d72;
+  box-shadow: 0 0 0 3px rgba(255, 45, 114, 0.15);
+}
+
+.config-option input[type="checkbox"]:checked~.custom-checkbox::after {
+  transform: rotate(45deg) scale(1) translate(-1px, -1px);
+}
+
+.config-option:hover .custom-checkbox {
+  border-color: #ff94b8;
+}
+
+.config-option input[type="checkbox"]:checked~.custom-checkbox {
+  background: linear-gradient(135deg, #ff5d94, #ff2d72);
+  border-color: #ff2d72;
+}
+
+/* Focus rings for keyboard accessibility */
+.config-option input[type="radio"]:focus-visible~.custom-radio,
+.config-option input[type="checkbox"]:focus-visible~.custom-checkbox {
+  outline: 2px solid #ff2d72;
+  outline-offset: 2px;
+}
+
+/* ---- Q count buttons ---- */
+.q-count-btn {
+  color: #6b7280;
+  background: transparent;
+  border-color: #e5e7eb;
+}
+
+.dark .q-count-btn {
+  color: #9ca3af;
+  border-color: #374151;
+}
+
+.q-count-btn:hover {
+  border-color: #f472b6;
+  color: #ec4899;
+}
+
+.q-count-btn.active {
+  background: linear-gradient(135deg, #ff5d94, #ff2d72);
+  color: #ffffff;
+  border-color: #ff2d72;
+  box-shadow: 0 4px 12px rgba(255, 45, 114, 0.3);
+}
+
+/* ---- Study tab buttons ---- */
+.study-tab-btn {
+  color: #6b7280;
+  border-color: #e5e7eb;
+  background: transparent;
+}
+
+.dark .study-tab-btn {
+  color: #9ca3af;
+  border-color: #374151;
+}
+
+.study-tab-btn:hover {
+  border-color: #f472b6;
+  color: #ec4899;
+}
+
+.study-tab-btn.active {
+  background: #fff0f5;
+  border-color: #ff2d72;
+  color: #e11d48;
+}
+
+.dark .study-tab-btn.active {
+  background: rgba(255, 45, 114, 0.1);
+  border-color: #ff2d72;
+  color: #f9a8d4;
+}
+
+/* ---- Kana Table Card ---- */
+.kana-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.25rem;
+  min-width: 52px;
+  min-height: 60px;
+  border-radius: 0.5rem;
+  transition: background 0.15s;
+  cursor: default;
+}
+
+.kana-cell:hover {
+  background: #fff0f5;
+}
+
+.dark .kana-cell:hover {
+  background: rgba(255, 45, 114, 0.08);
+}
+
+.kana-char {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #111827;
+}
+
+.dark .kana-char {
+  color: #f9fafb;
+}
+
+.kana-rom {
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #9ca3af;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  margin-top: 2px;
+}
+
+.kana-cell.empty {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.kana-table-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.dark .kana-table-section {
+  background: #111827;
+  border-color: #1f2937;
+}
+
+.kana-table-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kana-table-title span.badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.kana-table-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* ---- Test HUD stat chips ---- */
+.hud-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+.hud-chip-new {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #16a34a;
+}
+
+.dark .hud-chip-new {
+  background: rgba(22, 163, 74, 0.12);
+  border-color: rgba(22, 163, 74, 0.3);
+  color: #4ade80;
+}
+
+.hud-chip-redo {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #ea580c;
+}
+
+.dark .hud-chip-redo {
+  background: rgba(234, 88, 12, 0.12);
+  border-color: rgba(234, 88, 12, 0.3);
+  color: #fb923c;
+}
+
+.hud-chip-pending {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+.dark .hud-chip-pending {
+  background: rgba(71, 85, 105, 0.15);
+  border-color: rgba(100, 116, 139, 0.3);
+  color: #94a3b8;
+}
+
+/* ---- Reference table ---- */
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.ref-table th {
+  background: #f9fafb;
+  color: #6b7280;
+  font-weight: 600;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 2px solid #e5e7eb;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dark .ref-table th {
+  background: #1f2937;
+  color: #9ca3af;
+  border-color: #374151;
+}
+
+.ref-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+
+.dark .ref-table td {
+  border-color: #1f2937;
+  color: #d1d5db;
+}
+
+.ref-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ref-table tr:hover td {
+  background: #fff0f5;
+}
+
+.dark .ref-table tr:hover td {
+  background: rgba(255, 45, 114, 0.04);
+}
+
+.ref-kana-char {
+  font-size: 1.4rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dark .ref-kana-char {
+  color: #f9fafb;
+}
+
+/* Pool preview chips */
+.pool-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dark .pool-chip {
+  background: #1f2937;
+  border-color: #374151;
+  color: #d1d5db;
+}
+
+/* Progress bar segments */
+.progress-bar-track {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dark .progress-bar-track {
+  background: #374151;
+}
+
+/* =============================================
+   CUSTOM FROSTED SCROLLBAR
+   ============================================= */
+
+/* Global thin scrollbar for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 45, 114, 0.45) rgba(255, 255, 255, 0.06);
+}
+
+.dark * {
+  scrollbar-color: rgba(255, 45, 114, 0.5) rgba(255, 255, 255, 0.04);
+}
+
+/* Webkit (Chrome, Safari, Edge) scrollbar track */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 4px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(15, 15, 30, 0.25);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Thumb — sakura pink gradient with frosted feel */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255, 94, 148, 0.75) 0%, rgba(255, 45, 114, 0.85) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(255, 45, 114, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(255, 94, 148, 0.95) 0%, rgba(255, 45, 114, 1) 100%);
+  box-shadow: 0 4px 14px rgba(255, 45, 114, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #ff2d72 0%, #e0004a 100%);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+  border: none;
+}
+
+/* Thin scrollbar for inner pool preview */
+#pool-preview-chips::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+#pool-preview-chips::-webkit-scrollbar-thumb {
+  border-width: 1px;
+}

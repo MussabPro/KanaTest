@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KanaTest — Learn & Practice Hiragana and Katakana</title>
+  <meta name="description"
+    content="Free Hiragana test and Katakana test. Practice Japanese kana with instant feedback, speed tests, and printable reference tables. Improve your Romaji recall accuracy today." />
+  <meta name="keywords"
+    content="hiragana test, katakana test, practice hiragana, practice katakana, kana quiz, japanese writing practice, romaji" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="KanaTest — Learn & Practice Hiragana and Katakana" />
+  <meta property="og:description"
+    content="Free Hiragana test and Katakana test with instant feedback, speed timer, and progress tracking. Master Japanese kana today!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="OpenGraph.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="KanaTest — Learn & Practice Hiragana and Katakana" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KanaTest — Learn & Practice Hiragana and Katakana" />
+  <meta name="twitter:description"
+    content="Free Hiragana & Katakana test with instant feedback, speed timer, and progress tracking." />
+  <meta name="twitter:image" content="OpenGraph.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            jp: ['"Noto Sans JP"', 'sans-serif'],
+          },
+          colors: {
+            sakura: {
+              50: '#fff0f5',
+              100: '#ffe1ec',
+              200: '#ffc2d8',
+              300: '#ff94b8',
+              400: '#ff5d94',
+              500: '#ff2d72',
+              600: '#f0004e',
+              700: '#cc003f',
+              800: '#a80038',
+              900: '#8c0033',
+            },
+            indigo: {
+              950: '#1a1a3e',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.3s ease-out',
+            'slide-up': 'slideUp 0.4s ease-out',
+            'pop': 'pop 0.2s ease-out',
+            'shake': 'shake 0.4s ease-out',
+            'pulse-ring': 'pulseRing 1.5s cubic-bezier(0.4,0,0.6,1) infinite',
+          },
+          keyframes: {
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            pop: { '0%': { transform: 'scale(0.8)', opacity: '0' }, '70%': { transform: 'scale(1.05)' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+            shake: { '0%,100%': { transform: 'translateX(0)' }, '20%': { transform: 'translateX(-8px)' }, '40%': { transform: 'translateX(8px)' }, '60%': { transform: 'translateX(-5px)' }, '80%': { transform: 'translateX(5px)' } },
+            pulseRing: { '0%,100%': { opacity: '1' }, '50%': { opacity: '0.4' } },
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-stone-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans"
+  id="app-body">
+
+
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav
+    class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-stone-200 dark:border-gray-800"
+    id="main-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div
+            class="w-9 h-9 rounded-xl bg-gradient-to-br from-sakura-400 to-sakura-600 flex items-center justify-center shadow-md">
+            <span class="text-white font-jp font-bold text-base leading-none">あ</span>
+          </div>
+          <div>
+            <span class="font-bold text-lg tracking-tight text-gray-900 dark:text-white">KanaTest</span>
+            <span class="hidden sm:block text-xs text-gray-500 dark:text-gray-400 -mt-0.5">Japanese Kana Practice</span>
+          </div>
+        </div>
+
+        <!-- Nav Tabs -->
+        <div class="flex items-center gap-1 bg-stone-100 dark:bg-gray-800 rounded-xl p-1">
+          <button id="tab-study" onclick="showSection('study')"
+            class="nav-tab active px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200">Study</button>
+          <button id="tab-test" onclick="showSection('test')"
+            class="nav-tab px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200">Test</button>
+          <button id="tab-reference" onclick="showSection('reference')"
+            class="nav-tab px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200">Reference</button>
+        </div>
+
+        <!-- Right controls -->
+        <div class="flex items-center gap-2">
+          <button id="dark-mode-btn" onclick="toggleDarkMode()"
+            class="w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-stone-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle dark mode" title="Toggle dark mode">
+            <svg id="icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ========================================= -->
+    <!-- STUDY SECTION                             -->
+    <!-- ========================================= -->
+    <section id="section-study" class="section-panel animate-fade-in">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 no-print">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Kana Tables</h1>
+          <p class="text-gray-500 dark:text-gray-400 mt-1">Study Hiragana and Katakana in Gojūon order</p>
+        </div>
+      </div>
+
+
+      <!-- Kana type toggle -->
+      <div class="flex gap-2 mb-6 flex-wrap">
+        <button id="study-tab-hiragana" onclick="switchStudyTab('hiragana')"
+          class="study-tab-btn active px-4 py-2 rounded-xl text-sm font-medium transition-all border-2">Hiragana
+          (平仮名)</button>
+        <button id="study-tab-katakana" onclick="switchStudyTab('katakana')"
+          class="study-tab-btn px-4 py-2 rounded-xl text-sm font-medium transition-all border-2">Katakana (片仮名)</button>
+
+      </div>
+
+      <!-- Tables container -->
+      <div id="study-tables-container" class="space-y-10 print-section">
+        <!-- Dynamically generated -->
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- TEST SECTION                              -->
+    <!-- ========================================= -->
+    <section id="section-test" class="section-panel hidden no-print">
+
+      <!-- Config Panel -->
+      <div id="test-config" class="animate-slide-up">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Kana Test</h1>
+          <p class="text-gray-500 dark:text-gray-400 mt-1">Configure your test and practice Hiragana &amp; Katakana</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Left: Config options -->
+          <div class="space-y-5">
+            <!-- Kana Type -->
+            <div
+              class="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-stone-200 dark:border-gray-800 shadow-sm">
+              <h2 class="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+                <span
+                  class="w-6 h-6 bg-sakura-100 dark:bg-sakura-900/30 text-sakura-600 dark:text-sakura-400 rounded-lg flex items-center justify-center text-xs font-bold">1</span>
+                Kana Type
+              </h2>
+              <div class="grid grid-cols-1 gap-2" id="kana-type-options">
+                <label class="config-option" for="opt-simple-hiragana">
+                  <input type="radio" id="opt-simple-hiragana" name="kana-type" value="simple-hiragana" checked />
+                  <span class="custom-radio"></span>
+                  <span class="flex-1">Simple Hiragana <span class="text-xs text-gray-400 font-jp">あいうえお…</span></span>
+                </label>
+                <label class="config-option" for="opt-all-hiragana">
+                  <input type="radio" id="opt-all-hiragana" name="kana-type" value="all-hiragana" />
+                  <span class="custom-radio"></span>
+                  <span class="flex-1">All Hiragana <span class="text-xs text-gray-400">(with selected
+                      modifiers)</span></span>
+                </label>
+                <label class="config-option" for="opt-simple-katakana">
+                  <input type="radio" id="opt-simple-katakana" name="kana-type" value="simple-katakana" />
+                  <span class="custom-radio"></span>
+                  <span class="flex-1">Simple Katakana <span class="text-xs text-gray-400 font-jp">アイウエオ…</span></span>
+                </label>
+                <label class="config-option" for="opt-all-katakana">
+                  <input type="radio" id="opt-all-katakana" name="kana-type" value="all-katakana" />
+                  <span class="custom-radio"></span>
+                  <span class="flex-1">All Katakana <span class="text-xs text-gray-400">(with selected
+                      modifiers)</span></span>
+                </label>
+                <label class="config-option" for="opt-mixed">
+                  <input type="radio" id="opt-mixed" name="kana-type" value="mixed" />
+                  <span class="custom-radio"></span>
+                  <span class="flex-1">Mixed Kana <span class="text-xs text-gray-400">(Hiragana +
+                      Katakana)</span></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Modifiers -->
+            <div
+              class="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-stone-200 dark:border-gray-800 shadow-sm"
+              id="modifiers-panel">
+              <h2 class="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+                <span
+                  class="w-6 h-6 bg-sakura-100 dark:bg-sakura-900/30 text-sakura-600 dark:text-sakura-400 rounded-lg flex items-center justify-center text-xs font-bold">2</span>
+                Modifiers
+              </h2>
+              <div class="space-y-2">
+                <label class="config-option" for="mod-dakuon">
+                  <input type="checkbox" id="mod-dakuon" />
+                  <span class="custom-checkbox"></span>
+                  <span class="flex-1">Include Dakuon <span class="font-jp text-gray-400">が、ざ、だ、ば…</span></span>
+                </label>
+                <label class="config-option" for="mod-handakuten">
+                  <input type="checkbox" id="mod-handakuten" />
+                  <span class="custom-checkbox"></span>
+                  <span class="flex-1">Include Handakuten <span class="font-jp text-gray-400">ぱ、ぴ、ぷ…</span></span>
+                </label>
+                <label class="config-option" for="mod-combo">
+                  <input type="checkbox" id="mod-combo" />
+                  <span class="custom-checkbox"></span>
+                  <span class="flex-1">Include Combination Kana <span class="font-jp text-gray-400">きゃ、しゅ…</span></span>
+                </label>
+                <label class="config-option" for="mod-halfwidth">
+                  <input type="checkbox" id="mod-halfwidth" />
+                  <span class="custom-checkbox"></span>
+                  <span class="flex-1">Half-width Katakana <span class="font-jp text-gray-400 text-xs">ｱｲｳｴｵ…</span>
+                    <span class="text-xs text-amber-500 font-medium">[Advanced]</span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Questions + Preview -->
+          <div class="space-y-5">
+            <!-- Question Count -->
+            <div
+              class="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-stone-200 dark:border-gray-800 shadow-sm">
+              <h2 class="font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+                <span
+                  class="w-6 h-6 bg-sakura-100 dark:bg-sakura-900/30 text-sakura-600 dark:text-sakura-400 rounded-lg flex items-center justify-center text-xs font-bold">3</span>
+                Number of Questions
+              </h2>
+              <div class="grid grid-cols-4 gap-2 mb-4">
+                <button onclick="setQuestionCount(10)"
+                  class="q-count-btn py-2 rounded-xl text-sm font-semibold border-2 transition-all"
+                  data-count="10">10</button>
+                <button onclick="setQuestionCount(20)"
+                  class="q-count-btn py-2 rounded-xl text-sm font-semibold border-2 transition-all"
+                  data-count="20">20</button>
+                <button onclick="setQuestionCount(30)"
+                  class="q-count-btn py-2 rounded-xl text-sm font-semibold border-2 transition-all"
+                  data-count="30">30</button>
+                <button onclick="setQuestionCount(50)"
+                  class="q-count-btn py-2 rounded-xl text-sm font-semibold border-2 transition-all active"
+                  data-count="50">50</button>
+              </div>
+              <div class="flex items-center gap-3">
+                <label class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap"
+                  for="custom-count">Custom:</label>
+                <input type="number" id="custom-count" min="1" max="200" placeholder="e.g. 25"
+                  class="flex-1 px-3 py-2 rounded-xl border border-stone-200 dark:border-gray-700 bg-stone-50 dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-sakura-400 transition-all" />
+              </div>
+            </div>
+
+            <!-- Timer -->
+            <div
+              class="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-stone-200 dark:border-gray-800 shadow-sm">
+              <h2 class="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+                <span
+                  class="w-6 h-6 bg-sakura-100 dark:bg-sakura-900/30 text-sakura-600 dark:text-sakura-400 rounded-lg flex items-center justify-center text-xs font-bold">4</span>
+                Timer Mode
+              </h2>
+              <label class="config-option" for="timer-mode">
+                <input type="checkbox" id="timer-mode" />
+                <span class="custom-checkbox"></span>
+                <span class="flex-1">Enable Speed Timer</span>
+              </label>
+            </div>
+
+            <!-- Preview pool -->
+            <div
+              class="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-stone-200 dark:border-gray-800 shadow-sm">
+              <h2 class="font-semibold text-gray-800 dark:text-gray-200 mb-3">Pool Preview</h2>
+              <p id="pool-preview-text" class="text-sm text-gray-500 dark:text-gray-400 mb-2">Characters available:</p>
+              <div id="pool-preview-chips" class="flex flex-wrap gap-1 max-h-28 overflow-y-auto font-jp"></div>
+            </div>
+
+            <!-- Start Button -->
+            <button id="start-test-btn" onclick="startTest()"
+              class="w-full py-4 bg-gradient-to-r from-sakura-500 to-sakura-600 hover:from-sakura-600 hover:to-sakura-700 text-white rounded-2xl font-bold text-lg shadow-xl shadow-sakura-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">
+              Start Test →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ACTIVE TEST ===== -->
+      <div id="test-active" class="hidden">
+        <!-- Progress HUD -->
+        <div class="mb-5">
+          <!-- Top row: counters + timer -->
+          <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+            <!-- 3 stat chips -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="hud-chip hud-chip-new" title="Answered correctly on first attempt">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                New <span id="hud-new" class="tabular-nums">0</span>
+              </span>
+              <span class="hud-chip hud-chip-redo" title="Questions queued for retry">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Redo <span id="hud-redo" class="tabular-nums">0</span>
+              </span>
+              <span class="hud-chip hud-chip-pending" title="Questions not yet seen">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Pending <span id="hud-pending" class="tabular-nums">0</span>
+              </span>
+            </div>
+            <!-- Timer -->
+            <span id="timer-display" style="display:none"
+              class="font-mono text-sm font-semibold text-sakura-500 dark:text-sakura-400 flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span id="timer-value">0:00</span>
+            </span>
+          </div>
+          <!-- Progress bar with label -->
+          <div class="flex items-center gap-3">
+            <div class="flex-1 progress-bar-track">
+              <div id="progress-bar"
+                class="h-full bg-gradient-to-r from-sakura-400 to-sakura-600 rounded-full transition-all duration-500"
+                style="width:0%"></div>
+            </div>
+            <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 tabular-nums w-12 text-right">
+              <span id="q-current">0</span>/<span id="q-total">50</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Kana Card -->
+        <div class="flex flex-col items-center justify-center py-8">
+          <div id="kana-card"
+            class="relative w-56 h-56 sm:w-72 sm:h-72 rounded-3xl flex flex-col items-center justify-center shadow-2xl mb-2 transition-all duration-300 bg-white dark:bg-gray-900 border-2 border-stone-200 dark:border-gray-700 overflow-hidden">
+            <!-- Subtle bg decoration -->
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-sakura-50/60 to-transparent dark:from-sakura-900/10 pointer-events-none">
+            </div>
+            <div id="kana-character"
+              class="font-jp text-8xl sm:text-9xl font-bold text-gray-900 dark:text-white leading-none animate-pop select-none relative z-10">
+            </div>
+            <div id="kana-type-badge"
+              class="absolute bottom-4 text-xs font-medium px-2.5 py-1 rounded-full bg-stone-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+            </div>
+          </div>
+
+          <!-- Feedback area -->
+          <div id="feedback-area" class="h-12 flex items-center justify-center mb-6">
+            <div id="feedback-msg" class="text-base font-semibold transition-all duration-200 hidden"></div>
+          </div>
+
+          <!-- Input -->
+          <div class="w-full max-w-sm">
+            <div class="relative">
+              <input type="text" id="romaji-input" placeholder="Type romaji..." autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false" inputmode="latin"
+                class="w-full text-center text-2xl font-semibold px-6 py-5 rounded-2xl border-2 border-stone-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-600 focus:outline-none focus:border-sakura-400 focus:ring-4 focus:ring-sakura-400/20 transition-all duration-200 shadow-md" />
+              <div id="input-icon" class="absolute right-4 top-1/2 -translate-y-1/2 text-2xl hidden"></div>
+            </div>
+            <p class="text-center text-xs text-gray-400 dark:text-gray-600 mt-2">Press <kbd
+                class="px-1.5 py-0.5 text-xs bg-stone-100 dark:bg-gray-800 rounded border border-stone-300 dark:border-gray-700">Enter</kbd>
+              to submit</p>
+          </div>
+
+          <!-- Wrong answer reveal -->
+          <div id="wrong-reveal"
+            class="hidden mt-6 p-4 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-center max-w-sm w-full animate-slide-up">
+            <p class="text-red-600 dark:text-red-400 font-medium text-sm mb-1">Incorrect! The answer is:</p>
+            <p id="correct-answer-display" class="text-2xl font-bold text-gray-900 dark:text-white font-jp"></p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">This question will repeat until you get it right ✓
+            </p>
+          </div>
+        </div>
+
+        <!-- Quit button -->
+        <div class="flex justify-center mt-4">
+          <button onclick="quitTest()"
+            class="text-sm text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 underline transition-colors">
+            Quit test
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== RESULTS ===== -->
+      <div id="test-results" class="hidden animate-slide-up">
+        <div class="max-w-2xl mx-auto">
+          <div class="text-center mb-8">
+            <div id="results-emoji" class="text-6xl mb-3"></div>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Test Complete!</h2>
+            <p id="results-subtitle" class="text-gray-500 dark:text-gray-400"></p>
+          </div>
+
+          <!-- Stats grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <div
+              class="stat-card bg-white dark:bg-gray-900 rounded-2xl p-4 border border-stone-200 dark:border-gray-800 text-center">
+              <div class="text-3xl font-bold text-gray-900 dark:text-white" id="stat-total">0</div>
+              <div class="text-xs text-gray-500 mt-1">Total</div>
+            </div>
+            <div
+              class="stat-card bg-green-50 dark:bg-green-900/20 rounded-2xl p-4 border border-green-200 dark:border-green-800 text-center">
+              <div class="text-3xl font-bold text-green-600 dark:text-green-400" id="stat-correct">0</div>
+              <div class="text-xs text-gray-500 mt-1">Correct</div>
+            </div>
+            <div
+              class="stat-card bg-red-50 dark:bg-red-900/20 rounded-2xl p-4 border border-red-200 dark:border-red-800 text-center">
+              <div class="text-3xl font-bold text-red-500 dark:text-red-400" id="stat-wrong">0</div>
+              <div class="text-xs text-gray-500 mt-1">Incorrect</div>
+            </div>
+            <div
+              class="stat-card bg-sakura-50 dark:bg-sakura-900/20 rounded-2xl p-4 border border-sakura-200 dark:border-sakura-800 text-center">
+              <div class="text-3xl font-bold text-sakura-600 dark:text-sakura-400" id="stat-accuracy">0%</div>
+              <div class="text-xs text-gray-500 mt-1">Accuracy</div>
+            </div>
+          </div>
+
+          <!-- Time -->
+          <div id="time-stat-block" class="hidden text-center mb-5 text-sm text-gray-500 dark:text-gray-400"
+            style="display:none">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Time taken: <span id="stat-time" class="font-semibold text-gray-700 dark:text-gray-300"></span>
+          </div>
+
+          <!-- Mistakes -->
+          <div id="mistakes-section"
+            class="hidden bg-white dark:bg-gray-900 rounded-2xl border border-stone-200 dark:border-gray-800 p-5 mb-6">
+            <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+              <span class="text-red-500">✗</span> Mistakes to Review
+            </h3>
+            <div id="mistakes-list" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button onclick="restartTest()"
+              class="flex-1 py-3 bg-gradient-to-r from-sakura-500 to-sakura-600 text-white rounded-2xl font-semibold hover:from-sakura-600 hover:to-sakura-700 transition-all shadow-lg shadow-sakura-500/20">
+              Try Again
+            </button>
+            <button onclick="backToConfig()"
+              class="flex-1 py-3 bg-stone-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-2xl font-semibold hover:bg-stone-200 dark:hover:bg-gray-700 transition-all">
+              New Configuration
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- REFERENCE SECTION                         -->
+    <!-- ========================================= -->
+    <section id="section-reference" class="section-panel hidden animate-fade-in">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Reference Tables</h1>
+        <p class="text-gray-500 dark:text-gray-400 mt-1">Complete Kana → Romaji mappings, Dakuon, Handakuten, and
+          combinations</p>
+      </div>
+      <div id="reference-container" class="space-y-10">
+        <!-- Dynamically generated -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer
+    class="mt-16 border-t border-stone-200 dark:border-gray-800 py-8 text-center text-sm text-gray-400 dark:text-gray-600">
+    <p>KanaTest — Practice <strong class="text-gray-500 dark:text-gray-500">Hiragana test</strong> &amp; <strong
+        class="text-gray-500 dark:text-gray-500">Katakana test</strong> for free</p>
+    <p class="mt-1">Built for Japanese learners · Learn <strong class="text-gray-500 dark:text-gray-500">Practice
+        Hiragana</strong> &amp; <strong class="text-gray-500 dark:text-gray-500">Practice Katakana</strong> every day
+    </p>
+  </footer>
+
+  <script src="kana-data.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
